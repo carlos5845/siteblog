@@ -1,0 +1,78 @@
+---
+import { siteConfig } from '../config/site';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-slate-200 bg-white text-slate-600 text-sm mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+      
+      {/* Columna Principal */}
+      <div class="lg:col-span-2 space-y-4">
+        <a href="/" class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-black text-sm">
+            DS
+          </div>
+          <span class="text-xl font-black text-slate-900 tracking-tight uppercase">{siteConfig.name}</span>
+        </a>
+        <p class="text-slate-500 text-sm leading-relaxed max-w-sm">
+          Portal tecnológico especializado en Inteligencia Artificial, automatización de procesos, productividad y directorio de software analizado rigurosamente.
+        </p>
+        <div class="text-xs text-slate-400">
+          Contenido independiente, utilidades gratuitas y sin cookies intrusivas.
+        </div>
+      </div>
+
+      {/* Columna 2: Módulos */}
+      <div class="space-y-3">
+        <h4 class="text-xs font-black uppercase tracking-wider text-slate-900">Módulos</h4>
+        <ul class="space-y-2.5 text-sm font-medium">
+          <li><a href="/guias" class="hover:text-black transition-colors">Guías y Tutoriales</a></li>
+          <li><a href="/herramientas" class="hover:text-black transition-colors">Directorio de Software</a></li>
+          <li><a href="/comparativas" class="hover:text-black transition-colors">Comparativas A vs B</a></li>
+          <li><a href="/utilidades" class="hover:text-black transition-colors">Utilidades Gratuitas</a></li>
+          <li><a href="/recursos" class="hover:text-black transition-colors">Plantillas & Prompts</a></li>
+        </ul>
+      </div>
+
+      {/* Columna 3: Especialidades */}
+      <div class="space-y-3">
+        <h4 class="text-xs font-black uppercase tracking-wider text-slate-900">Especialidades</h4>
+        <ul class="space-y-2.5 text-sm font-medium">
+          <li><a href="/ia" class="hover:text-black transition-colors">Inteligencia Artificial</a></li>
+          <li><a href="/automatizacion" class="hover:text-black transition-colors">Automatización & n8n</a></li>
+          <li><a href="/productividad" class="hover:text-black transition-colors">Productividad</a></li>
+          <li><a href="/utilidades/calculadora-tokens-ia" class="hover:text-black transition-colors">Calculadora de Tokens</a></li>
+        </ul>
+      </div>
+
+      {/* Columna 4: Cumplimiento AdSense */}
+      <div class="space-y-3">
+        <h4 class="text-xs font-black uppercase tracking-wider text-slate-900">Legal</h4>
+        <ul class="space-y-2.5 text-sm font-medium">
+          <li><a href="/privacidad" class="hover:text-black transition-colors">Política de Privacidad</a></li>
+          <li><a href="/terminos" class="hover:text-black transition-colors">Términos de Uso</a></li>
+          <li><a href="/cookies" class="hover:text-black transition-colors">Política de Cookies</a></li>
+          <li>
+            <button
+              type="button"
+              onclick="window.dispatchEvent(new CustomEvent('open-cookie-settings'))"
+              class="hover:text-black transition-colors text-left text-slate-500 hover:underline cursor-pointer"
+            >
+              Configurar Cookies
+            </button>
+          </li>
+          <li><a href="/contacto" class="hover:text-black transition-colors">Contacto</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    {/* Barra Inferior */}
+    <div class="mt-14 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
+      <p>© {currentYear} {siteConfig.name}. Todos los derechos reservados.</p>
+      <p>Construido con Astro, TypeScript & Tailwind CSS.</p>
+    </div>
+  </div>
+</footer>

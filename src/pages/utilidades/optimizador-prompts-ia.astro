@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdBanner from '../../components/AdBanner.astro';
+import PromptOptimizer from '../../components/tools/PromptOptimizer';
+
+const toolSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Generador y Optimizador de Prompts de IA',
+  description: 'Herramienta interactiva gratuita para generar prompts estructurados con marcos CRISPE, Chain-of-Thought y Few-Shot para ChatGPT, Claude y Cursor.',
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'All',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
+---
+
+<Layout
+  title="Generador & Optimizador de Prompts de IA (CRISPE, CoT, Few-Shot)"
+  description="Herramienta gratuita para crear prompts profesionales de ingeniería con delimitadores XML, roles precisos y cero alucinaciones."
+  schema={toolSchema}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    <nav class="flex items-center gap-2 text-xs font-bold text-slate-500 mb-6 uppercase tracking-wider">
+      <a href="/" class="hover:text-black">Inicio</a>
+      <span>/</span>
+      <a href="/utilidades" class="hover:text-black">Utilidades</a>
+      <span>/</span>
+      <span class="text-black font-black">Optimizador de Prompts</span>
+    </nav>
+
+    <AdBanner format="leaderboard" slotId="prompt-opt-top" />
+
+    <div class="my-8">
+      <PromptOptimizer client:load />
+    </div>
+
+    <AdBanner format="in-feed" slotId="prompt-opt-mid" />
+
+    {/* Explicación de los Marcos */}
+    <div class="max-w-4xl mx-auto my-14 space-y-10">
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight">
+          ¿Por qué estructurar tus prompts marca la diferencia?
+        </h2>
+        <p class="text-slate-700 leading-relaxed text-sm sm:text-base font-medium">
+          Los modelos de lenguaje más avanzados (como Claude 3.5 Sonnet, GPT-4o y DeepSeek R1) están entrenados para prestar especial atención a los límites semánticos. Un prompt estructurado con etiquetas XML y delimitadores claros reduce la probabilidad de alucinación en más de un 60% comparado con instrucciones informales.
+        </p>
+      </section>
+
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+          <span class="text-xs font-black uppercase text-[#854d0e] bg-[#fef08a] px-3 py-1 rounded-full">
+            Marco CRISPE
+          </span>
+          <h3 class="text-lg font-black text-slate-900 uppercase mt-3">Para Tareas Profesionales</h3>
+          <p class="text-xs text-slate-600 mt-2 font-medium leading-relaxed">
+            Permite definir con precisión la capacidad técnica del modelo, su rol, el contexto de fondo, la instrucción directa y la personalidad requerida.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+          <span class="text-xs font-black uppercase text-[#15803d] bg-[#dcfce7] px-3 py-1 rounded-full">
+            Chain-of-Thought (CoT)
+          </span>
+          <h3 class="text-lg font-black text-slate-900 uppercase mt-3">Para Razonamiento y Código</h3>
+          <p class="text-xs text-slate-600 mt-2 font-medium leading-relaxed">
+            Obliga al modelo a descomponer el problema en pasos lógicos antes de generar la respuesta final, evitando conclusiones apresuradas.
+          </p>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</Layout>

@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdBanner from '../../components/AdBanner.astro';
+
+const resources = [
+  {
+    title: 'Plantilla n8n: Clasificador Inteligente de Correos con IA',
+    type: 'JSON Workflow',
+    description: 'Importa este flujo en tu instancia de n8n para categorizar automáticamente correos entrantes y guardar resúmenes en Notion.',
+    downloads: '1,420 descargas',
+    badge: 'Más Descargado',
+    pillBg: 'bg-[#dcfce7] text-[#15803d]',
+    fileUrl: '/downloads/n8n-email-classifier.json',
+    fileName: 'n8n-email-classifier.json',
+  },
+  {
+    title: 'Mega-Pack de Prompts Estructurados & Cheatsheet de Parámetros',
+    type: 'Markdown / Guía',
+    description: 'Prompts probados para refactorización de código, generación de pruebas unitarias y guía de temperature/top_p.',
+    downloads: '2,890 descargas',
+    badge: 'Popular',
+    pillBg: 'bg-[#fef9c3] text-[#713f12]',
+    fileUrl: '/downloads/prompt-engineering-cheat-sheet.md',
+    fileName: 'prompt-engineering-cheat-sheet.md',
+  },
+  {
+    title: 'Plantilla n8n: Resumen Diario de Noticias de IA en Telegram',
+    type: 'JSON Workflow',
+    description: 'Captura feeds RSS de lanzamientos tecnológicos, los sintetiza con GPT-4o-mini y los envía a tu canal de Telegram cada mañana.',
+    downloads: '950 descargas',
+    pillBg: 'bg-[#ede9fe] text-[#6b21a8]',
+    fileUrl: '/downloads/n8n-email-classifier.json',
+    fileName: 'n8n-telegram-daily-summary.json',
+  },
+  {
+    title: 'Cheatsheet de Parámetros de LLMs (Temperature, Top_p, Delimitadores)',
+    type: 'Markdown / Referencia',
+    description: 'Resumen visual del impacto matemático de cada hiperparámetro al llamar endpoints de OpenAI y Anthropic.',
+    downloads: '3,110 descargas',
+    badge: 'Básico Esencial',
+    pillBg: 'bg-[#fce7f3] text-[#9d174d]',
+    fileUrl: '/downloads/prompt-engineering-cheat-sheet.md',
+    fileName: 'llm-parameters-cheatsheet.md',
+  },
+];
+---
+
+<Layout
+  title="Recursos Digitales, Plantillas y Prompts Descargables"
+  description="Biblioteca gratuita de recursos tecnológicos: workflows listos para n8n, packs de prompts de ingeniería para LLMs, plantillas de Notion y cheatsheets en PDF."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    <div class="max-w-3xl mx-auto text-center mb-10">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-black uppercase tracking-wider mb-3">
+        Descargas Inmediatas
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight uppercase">
+        Recursos Digitales Gratuitos
+      </h1>
+      <p class="text-slate-500 font-medium text-sm sm:text-base mt-3">
+        Plantillas, flujos y documentación técnica lista para importar y acelerar tus proyectos de inteligencia artificial.
+      </p>
+    </div>
+
+    <AdBanner format="leaderboard" slotId="resources-top-banner" />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10 max-w-5xl mx-auto">
+      {resources.map((item) => (
+        <div class="p-8 rounded-[2rem] border border-slate-200 bg-white hover:border-slate-400 hover:shadow-md transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full ${item.pillBg}`}>
+                {item.type}
+              </span>
+              {item.badge && (
+                <span class="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-full font-bold">
+                  {item.badge}
+                </span>
+              )}
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight group-hover:text-emerald-600 transition-colors">
+              {item.title}
+            </h3>
+
+            <p class="text-xs sm:text-sm text-slate-600 font-medium mt-2.5 leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-400">
+            <span>{item.downloads}</span>
+            <a
+              href={item.fileUrl}
+              download={item.fileName}
+              class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wide bg-black text-white hover:bg-slate-800 transition-all shadow-sm"
+            >
+              <span>Descargar Archivo</span>
+              <span>↓</span>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <AdBanner format="in-feed" slotId="resources-bottom-banner" />
+
+  </div>
+</Layout>

@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/site';
+---
+
+<Layout
+  title={`Política de Privacidad | ${siteConfig.name}`}
+  description={`Conoce la política de privacidad y protección de datos personales de ${siteConfig.name}.`}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight uppercase mb-4">
+      Política de Privacidad
+    </h1>
+    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-8">Última actualización: Noviembre 2026</p>
+
+    <div class="space-y-6 text-slate-600 text-sm font-medium leading-relaxed bg-white border border-slate-200 p-8 sm:p-10 rounded-[2rem] shadow-sm">
+      <section class="space-y-2">
+        <h2 class="text-lg font-black text-slate-900 uppercase">1. Información General</h2>
+        <p>
+          En <strong>{siteConfig.name}</strong>, accesible desde {siteConfig.url}, la privacidad de nuestros visitantes es una de nuestras principales prioridades. Este documento contiene los tipos de información que recopilamos y cómo la utilizamos.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-black text-slate-900 uppercase">2. Publicidad de Google AdSense y Cookies</h2>
+        <p>
+          Google es un proveedor externo en nuestro sitio. Google utiliza cookies (como la cookie de DART) para publicar anuncios basados en la visita de los usuarios a este y otros sitios web en Internet. Los usuarios pueden inhabilitar el uso de la cookie de DART visitando la Política de Privacidad de la red de contenido y anuncios de Google en: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" class="text-black font-bold underline">https://policies.google.com/technologies/ads</a>.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-black text-slate-900 uppercase">3. Archivos de Registro (Log Files)</h2>
+        <p>
+          {siteConfig.name} sigue un procedimiento estándar de uso de archivos de registro. Estos archivos registran a los visitantes cuando visitan sitios web. La información recopilada incluye direcciones IP, tipo de navegador, proveedor de servicios de Internet (ISP), marcas de fecha y hora, y páginas de referencia/salida.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-black text-slate-900 uppercase">4. Utilidades en el Navegador y Privacidad</h2>
+        <p>
+          Nuestras herramientas interactivas gratuitas (como la Calculadora de Tokens y Costos de IA) se ejecutan 100% en el lado del cliente (en tu propio navegador). No enviamos, almacenamos ni recopilamos el texto de tus prompts ni tus cálculos en servidores externos.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-black text-slate-900 uppercase">5. Contacto</h2>
+        <p>
+          Si tienes preguntas sobre nuestra política de privacidad, puedes contactarnos a través de nuestra página de <a href="/contacto" class="text-black font-bold underline">contacto</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>

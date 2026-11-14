@@ -1,11 +1,355 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import AdBanner from '../components/AdBanner.astro';
+import TokenCalculator from '../components/tools/TokenCalculator';
+import { siteConfig } from '../config/site';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const categoryPills = [
+  { name: 'Agentes de IA', bg: 'bg-[#fef08a] text-[#854d0e]' },
+  { name: 'n8n Workflows', bg: 'bg-[#bbf7d0] text-[#166534]' },
+  { name: 'Cursor IDE', bg: 'bg-[#fce7f3] text-[#9d174d]' },
+  { name: 'DeepSeek R1', bg: 'bg-[#bae6fd] text-[#075985]' },
+  { name: 'Prompt Engineering', bg: 'bg-[#fef9c3] text-[#713f12]' },
+  { name: 'Modelos Locales', bg: 'bg-[#fed7aa] text-[#9a3412]' },
+  { name: 'APIs & Costos', bg: 'bg-white text-slate-800' },
+  { name: 'Make & Zapier', bg: 'bg-[#e9d5ff] text-[#6b21a8]' },
+];
+
+const softwareDirectory = [
+  {
+    name: 'n8n',
+    category: 'Automatización',
+    desc: 'Orquesta flujos de trabajo avanzados y conecta agentes de IA en tus propios servidores.',
+    rating: '4.9',
+    pricing: 'Open Source',
+    tagBg: 'bg-[#bbf7d0] text-[#166534]',
+    link: 'https://n8n.io',
+  },
+  {
+    name: 'Claude 3.5 Sonnet',
+    category: 'Inteligencia Artificial',
+    desc: 'El modelo preferido por programadores para generación y depuración de código complejo.',
+    rating: '4.9',
+    pricing: 'Freemium',
+    tagBg: 'bg-[#fef08a] text-[#854d0e]',
+    link: 'https://claude.ai',
+  },
+  {
+    name: 'Cursor IDE',
+    category: 'Desarrollo',
+    desc: 'Editor basado en VS Code que indexa tu proyecto entero para programar a gran velocidad.',
+    rating: '4.8',
+    pricing: 'Freemium',
+    tagBg: 'bg-[#fce7f3] text-[#9d174d]',
+    link: 'https://cursor.com',
+  },
+  {
+    name: 'Ollama',
+    category: 'IA Local',
+    desc: 'Ejecuta modelos LLM potentes como Llama 3 y DeepSeek en tu hardware con privacidad total.',
+    rating: '4.9',
+    pricing: 'Gratis',
+    tagBg: 'bg-[#bae6fd] text-[#075985]',
+    link: 'https://ollama.com',
+  },
+];
 ---
 
 <Layout>
-	<Welcome />
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    {/* Cabecera del Portal al estilo exacto de la referencia */}
+    <div class="flex items-center justify-between mb-8 sm:mb-12">
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tighter uppercase">
+        PORTAL IA
+      </h1>
+      
+      <a
+        href="/guias"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold bg-slate-100 text-slate-800 hover:bg-slate-200 transition-colors shadow-sm"
+      >
+        <span>Explorar Todo</span>
+        <span>→</span>
+      </a>
+    </div>
+
+    {/* BENTO GRID PRINCIPAL (Inspirado en la imagen de referencia) */}
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      
+      {/* 1. Tarjeta Grande Izquierda (Visual / Destacado) */}
+      <div class="lg:col-span-5 rounded-[2.5rem] bg-slate-900 text-white p-7 sm:p-9 flex flex-col justify-between relative overflow-hidden min-h-[500px] shadow-lg group">
+        
+        {/* Badge superior flotante con icono animado de fuego */}
+        <div class="flex justify-between items-start z-10">
+          <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-xl icon-bounce">
+            🔥
+          </div>
+          <span class="px-3.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold uppercase tracking-wider text-white">
+            Top Guía
+          </span>
+        </div>
+
+        {/* Decoración gráfica geométrica limpia sin degradado */}
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
+          <svg class="w-96 h-96" viewBox="0 0 200 200" fill="currentColor">
+            <circle cx="100" cy="100" r="80" />
+          </svg>
+        </div>
+
+        {/* Contenido inferior con pill integrado */}
+        <div class="z-10 mt-auto pt-16">
+          <div class="inline-block bg-white text-slate-900 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wide mb-4">
+            Category . Automatización | 14 Nov
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black leading-tight uppercase tracking-tight group-hover:text-lime-300 transition-colors">
+            MEJORES MODELOS & AGENTES DE IA PARA MULTIPLICAR TU PRODUCTIVIDAD
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 mt-3 font-medium line-clamp-2">
+            Análisis profundo de la convergencia entre agentes autónomos, frameworks locales y automatizaciones avanzadas.
+          </p>
+          <a
+            href="/guias"
+            class="mt-5 inline-flex items-center gap-2 text-xs font-black uppercase text-lime-300 hover:text-white transition-colors"
+          >
+            Leer artículo completo →
+          </a>
+        </div>
+      </div>
+
+      {/* 2. Tarjeta Central Verde Lima Pastel Sólido (Estilo Exacto de Referencia) */}
+      <div class="lg:col-span-4 rounded-[2.5rem] bg-[#dcfce7] p-7 sm:p-8 flex flex-col justify-between relative shadow-sm hover:shadow-md transition-shadow group">
+        
+        {/* Botón Circular con flecha diagonal animada en esquina */}
+        <a
+          href="/guias"
+          class="absolute top-6 right-6 corner-arrow-btn"
+          title="Ver tutorial"
+          aria-label="Abrir tutorial"
+        >
+          <span class="text-lg font-bold">↗</span>
+        </a>
+
+        <div>
+          <span class="text-xs font-black text-[#15803d] uppercase tracking-wider block mb-4">
+            Category . Tutorial
+          </span>
+
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight uppercase leading-tight pr-12">
+            ¡LISTO, CONFIGURA Y CORRE! CÓMO INSTALAR OLLAMA EN WINDOWS
+          </h2>
+
+          <p class="text-xs sm:text-sm text-slate-700 mt-3 font-medium leading-relaxed">
+            Ejecuta DeepSeek R1 y Llama 3 localmente con privacidad total, sin enviar tokens a la nube y sin costo de suscripción.
+          </p>
+        </div>
+
+        {/* Sub-enlaces limpios con flechas */}
+        <div class="mt-8 pt-6 border-t border-[#bbf7d0] space-y-3 font-bold text-xs text-slate-900">
+          <a
+            href="/guias"
+            class="flex items-center justify-between py-1.5 hover:text-[#15803d] transition-colors group/link"
+          >
+            <span>CÓMO CONFIGURAR MEMORIA VRAM EN TU GPU</span>
+            <span class="group-hover/link:translate-x-1 transition-transform">→</span>
+          </a>
+          <a
+            href="/guias"
+            class="flex items-center justify-between py-1.5 hover:text-[#15803d] transition-colors group/link"
+          >
+            <span>INTEGRACIÓN DE MODELOS LOCALES CON CURSOR</span>
+            <span class="group-hover/link:translate-x-1 transition-transform">→</span>
+          </a>
+        </div>
+      </div>
+
+      {/* 3. Tarjeta Superior Derecha (Lavanda Pastel Sólido) */}
+      <div class="lg:col-span-3 rounded-[2.5rem] bg-[#ede9fe] p-7 sm:p-8 flex flex-col justify-between shadow-sm relative group">
+        <div>
+          <div class="flex items-center justify-between mb-3 text-xs font-black text-[#6b21a8] uppercase">
+            <span>Category . IA</span>
+            <span class="px-2 py-0.5 rounded-full bg-white text-[#6b21a8]">Hot • 14 Nov</span>
+          </div>
+
+          <h3 class="text-xl sm:text-2xl font-black text-slate-900 uppercase leading-snug tracking-tight">
+            CÓMO REDUCIR EL COSTO DE TOKENS EN APIS
+          </h3>
+
+          <p class="text-xs text-slate-700 mt-2.5 font-medium leading-relaxed">
+            Estrategias de Prompt Caching y selección de modelos compactos para recortar tu factura hasta un 70%.
+          </p>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-[#ddd6fe] flex items-center justify-between">
+          <span class="text-xs font-bold text-[#6b21a8]">5 min lectura</span>
+          <a href="/guias" class="text-xs font-black uppercase text-slate-900 hover:text-[#6b21a8] flex items-center gap-1">
+            <span>Leer</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      {/* 4. Tarjeta Inferior Central (Multimedia / Tutorial con Botón Play) */}
+      <div class="lg:col-span-7 rounded-[2.5rem] bg-white border border-slate-200 p-7 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm hover:border-slate-300 transition-colors">
+        <div class="flex-1">
+          <div class="inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-[11px] font-black uppercase tracking-wider mb-3">
+            5 Min • Tutorial Práctico
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
+            CREA UN BOT CON N8N, OPENAI Y TELEGRAM PASO A PASO
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-500 mt-2 font-medium">
+            Automatiza alertas inteligentes y clasifica información entrante sin escribir una sola línea de código complejo.
+          </p>
+        </div>
+
+        {/* Botón Play con micro-animación */}
+        <a
+          href="/guias"
+          class="shrink-0 w-16 h-16 rounded-full bg-black text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md group"
+          title="Ver tutorial interactivo"
+        >
+          <svg class="w-7 h-7 translate-x-0.5 group-hover:text-lime-300 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </a>
+      </div>
+
+      {/* 5. Tarjeta Inferior Derecha (Nube de Píldoras de Categorías en Color Pastel) */}
+      <div class="lg:col-span-5 rounded-[2.5rem] bg-[#ede9fe] p-7 sm:p-8 flex flex-col justify-between shadow-sm">
+        <div>
+          <span class="text-xs font-black text-[#6b21a8] uppercase tracking-wider block mb-4">
+            Categorías Principales
+          </span>
+
+          {/* Grid de Píldoras en colores pastel sólidos */}
+          <div class="flex flex-wrap gap-2">
+            {categoryPills.map((pill) => (
+              <a
+                href="/herramientas"
+                class={`px-4 py-2 rounded-full text-xs font-extrabold shadow-sm transition-transform hover:scale-105 ${pill.bg}`}
+              >
+                {pill.name}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-[#ddd6fe] flex items-center justify-between">
+          <a href="/herramientas" class="text-sm font-black uppercase text-slate-900 hover:text-[#6b21a8] transition-colors">
+            Ver Todas las Categorías
+          </a>
+          <a
+            href="/herramientas"
+            class="w-10 h-10 rounded-full bg-[#fef08a] text-slate-900 flex items-center justify-center font-bold hover:scale-110 transition-transform shadow-sm"
+          >
+            →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    {/* Primer Slot de Anuncio Sin CLS */}
+    <AdBanner format="leaderboard" slotId="home-after-bento-banner" />
+
+    {/* SECCIÓN INTERACTIVA: CALCULADORA DE TOKENS & COSTOS */}
+    <section class="my-16">
+      <div class="mb-8 text-center max-w-2xl mx-auto">
+        <span class="px-3.5 py-1 rounded-full bg-[#dcfce7] text-[#15803d] text-xs font-black uppercase tracking-wider">
+          Herramienta Interactiva Destacada
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight uppercase mt-3">
+          Calcula el Costo Real de tu IA
+        </h2>
+        <p class="text-sm text-slate-500 font-medium mt-2">
+          Evita sorpresas a fin de mes. Compara tarifas por llamada y consumo mensual de los principales modelos.
+        </p>
+      </div>
+
+      <TokenCalculator client:load />
+    </section>
+
+    {/* DIRECTORIO DE HERRAMIENTAS SELECCIONADAS */}
+    <section class="my-16">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-black text-slate-500 uppercase tracking-wider">Directorio de Software</span>
+          <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight uppercase mt-1">
+            Herramientas Imprescindibles
+          </h2>
+        </div>
+        <a
+          href="/herramientas"
+          class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase text-slate-900 hover:text-emerald-600 transition-colors"
+        >
+          <span>Ver catálogo completo (8+)</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {softwareDirectory.map((tool) => (
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 flex flex-col justify-between shadow-sm hover:border-slate-400 hover:shadow-md transition-all group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full ${tool.tagBg}`}>
+                  {tool.category}
+                </span>
+                <span class="text-xs font-bold font-mono text-slate-600">
+                  ★ {tool.rating}
+                </span>
+              </div>
+
+              <h3 class="text-xl font-black text-slate-900 uppercase group-hover:text-emerald-600 transition-colors">
+                {tool.name}
+              </h3>
+
+              <p class="text-xs text-slate-500 font-medium mt-2.5 leading-relaxed">
+                {tool.desc}
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold font-mono text-slate-700">{tool.pricing}</span>
+              <a
+                href={tool.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-8 h-8 rounded-full bg-slate-100 text-slate-900 flex items-center justify-center font-bold text-xs group-hover:bg-black group-hover:text-white transition-colors"
+                title="Visitar web"
+              >
+                ↗
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Segundo Slot de Anuncio Sin CLS */}
+    <AdBanner format="in-feed" slotId="home-bottom-feed-banner" />
+
+    {/* CAJA DE RECURSOS & DESCARGAS GRATUITAS */}
+    <section class="my-16 rounded-[2.5rem] bg-[#fef9c3] border border-[#fef08a] p-8 sm:p-12 text-center max-w-4xl mx-auto shadow-sm">
+      <div class="w-14 h-14 rounded-full bg-white text-2xl flex items-center justify-center mx-auto mb-4 icon-bounce shadow-sm">
+        📦
+      </div>
+      <h3 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight">
+        Descarga Plantillas y Workflows Gratuitos
+      </h3>
+      <p class="text-sm font-medium text-slate-700 mt-2 max-w-xl mx-auto">
+        Accede a flujos listos para importar en n8n, packs de prompts de ingeniería y guías en PDF sin costo alguno.
+      </p>
+      <div class="mt-8">
+        <a
+          href="/recursos"
+          class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs font-black uppercase tracking-wide bg-black text-white hover:bg-slate-800 transition-all shadow-md hover:scale-105"
+        >
+          <span>Explorar Zona de Recursos</span>
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
 </Layout>

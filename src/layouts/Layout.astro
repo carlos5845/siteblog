@@ -1,23 +1,135 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/ui/CookieConsent';
+import { siteConfig } from '../config/site';
+import { ClientRouter } from 'astro:transitions';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  type?: 'website' | 'article';
+  schema?: Record<string, any>;
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  image = '/og-default.png',
+  canonical = Astro.url.href,
+  type = 'website',
+  schema,
+} = Astro.props;
+
+const siteTitle = title.includes(siteConfig.name) ? title : `${title} | ${siteConfig.name}`;
+
+// Schema.org predeterminado para el portal (WebSite / Organization)
+const defaultSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteConfig.name,
+  url: siteConfig.url,
+  description: siteConfig.description,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${siteConfig.url}/buscar?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+const jsonLd = schema || defaultSchema;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonical} />
+    <meta name="generator" content={Astro.generator} />
+
+    {/* Tipografía Google Fonts: Plus Jakarta Sans (Minimalista estilo Google Sans) */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    {/* Metadatos Principales */}
+    <title>{siteTitle}</title>
+    <meta name="title" content={siteTitle} />
+    <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.author} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#ffffff" />
+
+    {/* Open Graph / Facebook */}
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, siteConfig.url).href} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content="es_ES" />
+
+    {/* Twitter */}
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={siteTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, siteConfig.url).href} />
+
+    {/* Schema.org Datos Estructurados JSON-LD */}
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    {/* Google AdSense - Meta de Verificación de Cuenta y Script Oficial */}
+    {siteConfig.adSenseClientId && (
+      <>
+        <meta name="google-adsense-account" content={siteConfig.adSenseClientId} />
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adSenseClientId}`}
+          crossorigin="anonymous"
+        />
+      </>
+    )}
+
+    {/* Google Ads / Google Analytics (gtag.js) */}
+    {(siteConfig.googleAdsId || siteConfig.googleAnalyticsId) && (
+      <>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.googleAdsId || siteConfig.googleAnalyticsId}`}
+        />
+        <script
+          is:inline
+          define:vars={{ adsId: siteConfig.googleAdsId, gaId: siteConfig.googleAnalyticsId }}
+        >
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          if (adsId) gtag('config', adsId);
+          if (gaId) gtag('config', gaId);
+        </script>
+      </>
+    )}
+
+    {/* Navegación instantánea tipo SPA estilo Next.js App Router */}
+    <ClientRouter />
+  </head>
+  <body class="bg-[#f8fafc] text-slate-900 flex flex-col min-h-screen selection:bg-lime-200 selection:text-slate-900">
+    <Header />
+    <main class="flex-1" transition:animate="fade">
+      <slot />
+    </main>
+    <Footer />
+    {/* Banner Interactivo de Consentimiento de Cookies (RGPD / AdSense / Google Consent Mode v2) */}
+    <CookieConsent client:load />
+  </body>
+</html>

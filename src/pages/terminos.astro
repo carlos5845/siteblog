@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/site';
+
+const lastUpdated = "14 de Noviembre de 2026";
+---
+
+<Layout
+  title={`Términos y Condiciones de Uso | ${siteConfig.name}`}
+  description={`Términos y condiciones legales que regulan el acceso, navegación y uso de la plataforma ${siteConfig.name}, sus herramientas gratuitas y recursos descargables.`}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    
+    <div class="mb-10 text-center sm:text-left">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-black uppercase tracking-wider mb-3">
+        Marco Legal
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight uppercase">
+        Términos y Condiciones de Uso
+      </h1>
+      <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-2">
+        Última actualización: {lastUpdated}
+      </p>
+    </div>
+
+    <div class="space-y-8 text-slate-600 text-sm font-medium leading-relaxed bg-white border border-slate-200 p-8 sm:p-12 rounded-[2.5rem] shadow-sm">
+      
+      {/* 1. Objeto */}
+      <section class="space-y-3">
+        <h2 class="text-lg font-black text-slate-900 uppercase tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-black"></span>
+          1. Objeto y Titularidad de la Plataforma
+        </h2>
+        <p>
+          El presente documento establece las condiciones de uso de <strong>{siteConfig.name}</strong> (en adelante, «la Plataforma» o «el Sitio Web»), accesible a través del dominio principal <code>{siteConfig.url}</code>.
+        </p>
+        <p>
+          {siteConfig.name} es un portal digital independiente enfocado en la divulgación tecnológica, tutoriales y guías educativas sobre Inteligencia Artificial, automatización de procesos, productividad digital, análisis de software y aplicaciones web interactivas gratuitas.
+        </p>
+      </section>
+
+      {/* 2. Aceptación */}
+      <section class="space-y-3">
+        <h2 class="text-lg font-black text-slate-900 uppercase tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-black"></span>
+          2. Aceptación de las Condiciones
+        </h2>
+        <p>
+          El acceso, navegación y utilización de {siteConfig.name} atribuye la condición de <strong>Usuario</strong> e implica la aceptación plena y sin reservas de todos y cada uno de los términos establecidos en el presente documento. Si el Usuario no estuviera conforme con estas condiciones, deberá abstenerse de utilizar el sitio web y sus utilidades.
+        </p>
+      </section>
+
+      {/* 3. Utilidades Interactivas */}
+      <section class="space-y-3">
+        <h2 class="text-lg font-black text-slate-900 uppercase tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-black"></span>
+          3. Uso de Utilidades Gratuitas y Calculadoras de IA
+        </h2>
+        <p>
+          {siteConfig.name} pone a disposición de los usuarios herramientas interactivas sin costo, tales como la <em>Calculadora de Tokens y Costos de APIs de IA</em>, el <em>Optimizador de Prompts</em> y el <em>Comparador de Modelos</em>:
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5 text-slate-600">
+          <li><strong>Procesamiento en el Cliente:</strong> Dichas utilidades operan de forma local en el navegador del usuario. {siteConfig.name} no almacena, monitorea ni comercializa los textos, prompts ni datos numéricos ingresados en dichas aplicaciones.</li>
+          <li><strong>Naturaleza Estimativa:</strong> Las proyecciones de precios y conteo de tokens son meramente informativas y orientativas. Los proveedores oficiales (OpenAI, Anthropic, Google Cloud, DeepSeek, etc.) se reservan el derecho de modificar sus políticas de facturación y precios por token en cualquier momento sin previo aviso.</li>
+          <li><strong>No Asesoramiento Vinculante:</strong> {siteConfig.name} no se hace responsable de discrepancias entre las estimaciones de nuestras calculadoras y las facturas reales emitidas por los proveedores de servicios cloud o APIs.</li>
+        </ul>
+      </section>
+
+      {/* 4. Descargas y Recursos */}
+      <section class="space-y-3">
+        <h2 class="text-lg font-black text-slate-900 uppercase tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-black"></span>
+          4. Recursos Descargables y Plantillas (Workflows n8n, Cheatsheets)
+        </h2>
+        <p>
+          Se autoriza la descarga de plantillas JSON para n8n, cheatsheets en Markdown/PDF y prompts publicados en la sección de Recursos para su implementación en entornos personales, educativos o profesionales.
+        </p>
+        <p>
+          El Usuario es responsable de revisar y validar cualquier flujo automatizado o script descargado antes de ejecutarlo en entornos de producción con datos sensibles de clientes o sistemas corporativos.
+        </p>
+      </section>
+
+      {/* 5. Publicidad y Enlaces de Afiliación */}
+      <section class="space-y-3">
+        <h2 class="text-lg font-black text-slate-900 uppercase tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-black"></span>
+          5. Publicidad, Google AdSense y Enlaces de Afiliados
+        </h2>
+        <p>
+          Para mantener la gratuidad de los contenidos y herramientas, {siteConfig.name} participa en redes publicitarias como <strong>Google AdSense</strong> y en programas de afiliación tecnológica.
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5 text-slate-600">
+          <li>Los anuncios servidos por Google AdSense están sujetos a sus propias políticas de privacidad y uso de cookies.</li>
+          <li>Algunos enlaces al directorio de software o plataformas recomendadas pueden contener códigos de afiliado, lo que significa que podemos recibir una pequeña comisión si el usuario decide contratar un plan, sin coste adicional para este.</li>
+          <li>Las recomendaciones editoriales se basan en análisis técnicos independientes del equipo y no están condicionadas por compensaciones publicitarias.</li>
+        </ul>
+      </section>
+
+      {/* 6. Propiedad Intelectual */}
+      <section class="space-y-3">
+        <h2 class="text-lg font-black text-slate-900 uppercase tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-black"></span>
+          6. Propiedad Intelectual e Industrial
+        </h2>
+        <p>
+          Todos los artículos, guías paso a paso, infografías, código fuente del sitio, logotipos y diseños visuales son titularidad de {siteConfig.name} o de sus respectivos licenciantes, encontrándose protegidos por las leyes de propiedad intelectual internacionales.
+        </p>
+        <p>
+          Las marcas comerciales, logotipos y nombres de productos citados (como n8n, Notion, Make, ChatGPT, Claude, Cursor, Telegram, Google, Docker) pertenecen a sus legítimos propietarios y se mencionan exclusivamente con fines identificativos y de análisis editorial.
+        </p>
+      </section>
+
+      {/* 7. Exclusión de Garantías */}
+      <section class="space-y-3">
+        <h2 class="text-lg font-black text-slate-900 uppercase tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-black"></span>
+          7. Exclusión de Garantías y Limitación de Responsabilidad
+        </h2>
+        <p>
+          {siteConfig.name} no garantiza la disponibilidad continua ni la infalibilidad técnica de los servidores, ni que el contenido esté completamente libre de errores tipográficos temporales. En ningún caso la Plataforma responderá por daños directos, indirectos, lucro cesante o pérdidas de datos derivadas del uso o imposibilidad de uso del portal.
+        </p>
+      </section>
+
+      {/* 8. Legislación y Contacto */}
+      <section class="space-y-3">
+        <h2 class="text-lg font-black text-slate-900 uppercase tracking-tight flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-black"></span>
+          8. Modificaciones y Contacto
+        </h2>
+        <p>
+          Nos reservamos el derecho de modificar o actualizar estos Términos en cualquier momento. Te recomendamos consultar periódicamente esta página. Para cualquier consulta legal, puedes comunicarte mediante nuestra página de <a href="/contacto" class="text-black font-black underline hover:text-emerald-600">Contacto</a>.
+        </p>
+      </section>
+
+    </div>
+  </div>
+</Layout>

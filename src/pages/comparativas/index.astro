@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdBanner from '../../components/AdBanner.astro';
+import ModelComparator from '../../components/tools/ModelComparator';
+import { COMPARISONS_DATA } from '../../data/comparisons';
+---
+
+<Layout
+  title="Comparativas de Software, Herramientas e Inteligencia Artificial"
+  description="Matriz interactiva para comparar todos los modelos de IA (OpenAI, Claude, Gemini, DeepSeek, Meta) y análisis profundos frente a frente."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    <div class="max-w-3xl mx-auto text-center mb-10">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-black uppercase tracking-wider mb-3">
+        Toma Decisiones Informadas
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight uppercase">
+        Comparativas Tecnológicas
+      </h1>
+      <p class="text-slate-500 font-medium text-sm sm:text-base mt-3">
+        Enfrentamos las herramientas y modelos de inteligencia artificial líderes del mercado para que sepas exactamente cuál se adapta a tus necesidades y presupuesto.
+      </p>
+    </div>
+
+    <AdBanner format="leaderboard" slotId="comparisons-top-banner" />
+
+    {/* Matriz Interactiva de TODOS los Modelos de IA */}
+    <div class="my-12">
+      <ModelComparator client:load />
+    </div>
+
+    {/* Listado de Comparativas Editoriales Destacadas (Con enlaces a sus páginas) */}
+    <div class="my-16">
+      <div class="mb-8">
+        <span class="text-xs font-black uppercase tracking-wider text-slate-500">Análisis a Fondo</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight uppercase mt-1">
+          Comparativas Editoriales Populares
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {COMPARISONS_DATA.map((comp) => (
+          <div class="p-8 rounded-[2rem] border border-slate-200 bg-white shadow-sm hover:border-slate-400 hover:shadow-md transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-4">
+                <span class="text-[10px] font-black text-slate-700 uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full">
+                  {comp.category}
+                </span>
+                <span class="text-xs font-bold text-slate-500">
+                  ★ Comparativa Oficial
+                </span>
+              </div>
+
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight group-hover:text-emerald-600 transition-colors">
+                {comp.title}
+              </h3>
+
+              <p class="text-xs sm:text-sm text-slate-600 font-medium mt-3 leading-relaxed">
+                {comp.summary}
+              </p>
+
+              <div class="mt-4 p-3 rounded-xl bg-[#dcfce7] border border-[#bbf7d0]">
+                <span class="text-[10px] font-black uppercase tracking-wider text-[#15803d] block">Ganador sugerido:</span>
+                <p class="text-xs font-bold text-[#14532d] mt-0.5 line-clamp-1">{comp.winner}</p>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between text-xs font-black uppercase text-slate-900">
+              <span>Leer comparativa completa</span>
+              <a
+                href={`/comparativas/${comp.slug}`}
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black text-white hover:bg-slate-800 transition-all shadow-sm"
+              >
+                <span>Ver análisis</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <AdBanner format="in-feed" slotId="comparisons-bottom-banner" />
+
+  </div>
+</Layout>

@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TokenCalculator from '../../components/tools/TokenCalculator';
+import AdBanner from '../../components/AdBanner.astro';
+
+const toolSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Calculadora de Tokens y Costos de IA',
+  description: 'Calcula el consumo de tokens y el costo en USD por petición y mensual de las APIs de OpenAI, Anthropic, Google Gemini y DeepSeek.',
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'All',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
+
+const faqs = [
+  {
+    q: '¿Qué es exactamente un token en Inteligencia Artificial?',
+    a: 'Un token es la unidad básica con la que los modelos de lenguaje (LLMs) procesan el texto. No equivale exactamente a una palabra; en promedio, en idiomas como español o inglés, 1 palabra equivale a aproximadamente 1.33 tokens (o 1,000 tokens ≈ 750 palabras).',
+  },
+  {
+    q: '¿Por qué los tokens de salida (output) son más caros que los de entrada (input)?',
+    a: 'El proceso de generación de texto (decodificación autorregresiva) es computacionalmente más costoso para los servidores de IA, ya que el modelo debe predecir y generar un token tras otro de forma secuencial, mientras que el prompt de entrada se puede paralelizar.',
+  },
+  {
+    q: '¿Cómo puedo reducir la factura de API de mi aplicación de IA?',
+    a: 'Puedes implementar técnicas como Prompt Caching (descuentos de hasta el 90% en Anthropic y OpenAI), elegir modelos compactos para tareas simples (ej. GPT-4o-mini o Gemini Flash), acortar los system prompts y almacenar en caché las respuestas comunes con Redis.',
+  },
+];
+---
+
+<Layout
+  title="Calculadora de Tokens & Costos de IA (OpenAI, Claude, Gemini, DeepSeek)"
+  description="Herramienta interactiva gratuita para estimar el costo de APIs de IA. Compara GPT-4o, Claude 3.5 Sonnet, Gemini Flash y DeepSeek en tiempo real."
+  schema={toolSchema}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    {/* Migas de pan */}
+    <nav class="flex items-center gap-2 text-xs font-bold text-slate-500 mb-6 uppercase tracking-wider">
+      <a href="/" class="hover:text-black">Inicio</a>
+      <span>/</span>
+      <a href="/utilidades" class="hover:text-black">Utilidades</a>
+      <span>/</span>
+      <span class="text-black font-black">Calculadora de Tokens</span>
+    </nav>
+
+    {/* Banner Superior */}
+    <AdBanner format="leaderboard" slotId="top-calc-banner" />
+
+    {/* Componente Interactivo en React */}
+    <div class="my-8">
+      <TokenCalculator client:load />
+    </div>
+
+    {/* Banner Intermedio */}
+    <AdBanner format="in-feed" slotId="middle-calc-banner" />
+
+    {/* Contenido Editorial Educativo */}
+    <div class="max-w-4xl mx-auto mt-14 space-y-12">
+      
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight">
+          ¿Cómo funcionan los costos de las APIs de Inteligencia Artificial?
+        </h2>
+        <p class="text-slate-600 leading-relaxed text-sm sm:text-base font-medium">
+          A diferencia del software tradicional bajo suscripción mensual fija, los proveedores de modelos de lenguaje grande (LLMs) facturan bajo el modelo de <strong>pago por uso (pay-as-you-go)</strong>, cobrando una tarifa por cada millón de tokens consumidos tanto en el prompt enviado (entrada) como en la respuesta generada (salida).
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-3">
+          <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+            <h4 class="font-black text-slate-900 text-sm uppercase tracking-wide">📥 Tokens de Entrada (Prompt)</h4>
+            <p class="text-xs text-slate-500 mt-2 font-medium leading-relaxed">
+              Incluye las instrucciones del sistema (system prompt), el historial de conversación, los datos de contexto (RAG) y la consulta enviada.
+            </p>
+          </div>
+          <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+            <h4 class="font-black text-slate-900 text-sm uppercase tracking-wide">📤 Tokens de Salida (Completion)</h4>
+            <p class="text-xs text-slate-500 mt-2 font-medium leading-relaxed">
+              Es el texto o código generado por la inteligencia artificial. Su costo unitario suele ser de 3 a 5 veces superior al de entrada.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Preguntas Frecuentes (FAQ) */}
+      <section class="space-y-4 pt-6 border-t border-slate-200">
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight">
+          Preguntas Frecuentes sobre Tokens de IA
+        </h2>
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm">
+              <h3 class="text-base font-black text-slate-900">{faq.q}</h3>
+              <p class="text-xs sm:text-sm text-slate-600 mt-2.5 font-medium leading-relaxed">{faq.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Enlace Sólido a Guías (Cero Degradados) */}
+      <section class="p-8 rounded-[2.5rem] bg-[#dcfce7] border border-[#bbf7d0] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+        <div>
+          <span class="text-xs font-black uppercase tracking-wider text-[#15803d]">Automatización Práctica</span>
+          <h3 class="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight mt-1">
+            ¿Quieres automatizar llamadas a LLMs sin código?
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-700 font-medium mt-1.5 max-w-xl">
+            Consulta nuestra guía completa sobre cómo orquestar flujos de IA con n8n y modelos locales o remotos.
+          </p>
+        </div>
+        <a
+          href="/guias"
+          class="shrink-0 px-6 py-3.5 rounded-full text-xs font-black uppercase tracking-wide bg-black text-white hover:bg-slate-800 transition-all shadow-md"
+        >
+          Ver Guías de n8n →
+        </a>
+      </section>
+
+    </div>
+
+  </div>
+</Layout>

@@ -1,0 +1,237 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdBanner from '../../components/AdBanner.astro';
+import { COMPARISONS_DATA, type ComparisonPage } from '../../data/comparisons';
+
+export function getStaticPaths() {
+  return COMPARISONS_DATA.map((comp) => ({
+    params: { slug: comp.slug },
+    props: { comp },
+  }));
+}
+
+interface Props {
+  comp: ComparisonPage;
+}
+
+const { comp } = Astro.props;
+
+const comparisonSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: comp.title,
+  description: comp.summary,
+  author: {
+    '@type': 'Organization',
+    name: 'DigitalStack Editorial',
+  },
+  datePublished: '2026-11-14',
+};
+---
+
+<Layout
+  title={`${comp.title}`}
+  description={comp.summary}
+  schema={comparisonSchema}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    {/* Migas de Pan */}
+    <nav class="flex items-center gap-2 text-xs font-bold text-slate-500 mb-6 uppercase tracking-wider">
+      <a href="/" class="hover:text-black">Inicio</a>
+      <span>/</span>
+      <a href="/comparativas" class="hover:text-black">Comparativas</a>
+      <span>/</span>
+      <span class="text-black font-black">{comp.shortTitle}</span>
+    </nav>
+
+    {/* Header Editorial de la Comparativa */}
+    <div class="max-w-4xl mx-auto text-center mb-10">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-[#fef08a] text-[#854d0e] text-xs font-black uppercase tracking-wider mb-4">
+        {comp.category}
+      </span>
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight uppercase leading-tight">
+        {comp.title}
+      </h1>
+      <p class="text-sm sm:text-lg text-slate-600 font-medium mt-4 max-w-2xl mx-auto leading-relaxed">
+        {comp.summary}
+      </p>
+
+      {/* Veredicto Rápido */}
+      <div class="mt-8 p-5 rounded-2xl bg-[#dcfce7] border border-[#bbf7d0] text-left max-w-2xl mx-auto shadow-sm">
+        <span class="text-xs font-black uppercase tracking-wider text-[#15803d] block mb-1">
+          Veredicto del Editor:
+        </span>
+        <p class="text-xs sm:text-sm font-bold text-[#14532d]">
+          {comp.winner}
+        </p>
+      </div>
+    </div>
+
+    <AdBanner format="leaderboard" slotId={`comp-${comp.slug}-top`} />
+
+    {/* Tarjetas Lado a Lado: Item A vs Item B */}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12 max-w-5xl mx-auto">
+      
+      {/* Opción A */}
+      <div class="p-8 rounded-[2rem] border border-slate-200 bg-white shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black uppercase tracking-wider text-slate-500">Opción A</span>
+            <span class="text-xs font-black px-3 py-1 rounded-full bg-slate-100 text-slate-800">
+              Puntaje: {comp.itemA.score}
+            </span>
+          </div>
+
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase">
+            {comp.itemA.name}
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 font-medium mt-2 leading-relaxed">
+            {comp.itemA.tagline}
+          </p>
+
+          {/* Pros */}
+          <div class="mt-6 space-y-2.5">
+            <span class="text-xs font-black uppercase tracking-wider text-[#15803d] block">Ventajas:</span>
+            {comp.itemA.pros.map((pro) => (
+              <div class="flex items-start gap-2 text-xs sm:text-sm font-medium text-slate-700">
+                <span class="text-emerald-600 font-bold">✓</span>
+                <span>{pro}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Contras */}
+          <div class="mt-6 space-y-2.5">
+            <span class="text-xs font-black uppercase tracking-wider text-[#991b1b] block">Desventajas:</span>
+            {comp.itemA.cons.map((con) => (
+              <div class="flex items-start gap-2 text-xs sm:text-sm font-medium text-slate-600">
+                <span class="text-red-500 font-bold">✕</span>
+                <span>{con}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Opción B */}
+      <div class="p-8 rounded-[2rem] border border-slate-200 bg-white shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black uppercase tracking-wider text-slate-500">Opción B</span>
+            <span class="text-xs font-black px-3 py-1 rounded-full bg-slate-100 text-slate-800">
+              Puntaje: {comp.itemB.score}
+            </span>
+          </div>
+
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase">
+            {comp.itemB.name}
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 font-medium mt-2 leading-relaxed">
+            {comp.itemB.tagline}
+          </p>
+
+          {/* Pros */}
+          <div class="mt-6 space-y-2.5">
+            <span class="text-xs font-black uppercase tracking-wider text-[#15803d] block">Ventajas:</span>
+            {comp.itemB.pros.map((pro) => (
+              <div class="flex items-start gap-2 text-xs sm:text-sm font-medium text-slate-700">
+                <span class="text-emerald-600 font-bold">✓</span>
+                <span>{pro}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Contras */}
+          <div class="mt-6 space-y-2.5">
+            <span class="text-xs font-black uppercase tracking-wider text-[#991b1b] block">Desventajas:</span>
+            {comp.itemB.cons.map((con) => (
+              <div class="flex items-start gap-2 text-xs sm:text-sm font-medium text-slate-600">
+                <span class="text-red-500 font-bold">✕</span>
+                <span>{con}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {/* Tabla Detallada de Características */}
+    <div class="my-14 max-w-5xl mx-auto rounded-[2.5rem] border border-slate-200 bg-white p-6 sm:p-10 shadow-sm">
+      <h3 class="text-2xl font-black text-slate-900 uppercase tracking-tight mb-6">
+        Tabla de Especificaciones y Diferencias
+      </h3>
+
+      <div class="overflow-x-auto rounded-2xl border border-slate-200">
+        <table class="w-full text-left text-xs sm:text-sm text-slate-700">
+          <thead class="bg-slate-50 text-slate-900 text-xs uppercase font-black border-b border-slate-200">
+            <tr>
+              <th class="px-5 py-4">Característica</th>
+              <th class="px-5 py-4">{comp.itemA.name}</th>
+              <th class="px-5 py-4">{comp.itemB.name}</th>
+              <th class="px-5 py-4 text-center">Ganador</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {comp.features.map((f) => (
+              <tr class="hover:bg-slate-50/70 font-mono text-xs">
+                <td class="px-5 py-3.5 font-sans font-bold text-slate-900">{f.name}</td>
+                <td class="px-5 py-3.5 text-slate-700">{f.itemA}</td>
+                <td class="px-5 py-3.5 text-slate-700">{f.itemB}</td>
+                <td class="px-5 py-3.5 text-center font-sans font-bold">
+                  {f.winner === 'A' && <span class="px-2 py-0.5 rounded-full bg-[#dcfce7] text-[#15803d] text-[10px]">{comp.itemA.name}</span>}
+                  {f.winner === 'B' && <span class="px-2 py-0.5 rounded-full bg-[#ede9fe] text-[#6b21a8] text-[10px]">{comp.itemB.name}</span>}
+                  {f.winner === 'Tie' && <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px]">Empate</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {/* In-Article AdBanner */}
+    <AdBanner format="in-feed" slotId={`comp-${comp.slug}-mid`} />
+
+    {/* Análisis Editorial en Profundidad */}
+    <div class="max-w-4xl mx-auto my-14 space-y-10">
+      {comp.detailedAnalysis.map((sec) => (
+        <section class="space-y-3">
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight">
+            {sec.sectionTitle}
+          </h2>
+          <p class="text-slate-700 leading-relaxed text-sm sm:text-base font-medium">
+            {sec.content}
+          </p>
+        </section>
+      ))}
+
+      {/* Veredicto Detallado */}
+      <section class="p-8 sm:p-10 rounded-[2.5rem] bg-[#f8fafc] border border-slate-200">
+        <span class="text-xs font-black uppercase tracking-wider text-slate-500">Conclusión Final</span>
+        <h3 class="text-2xl font-black text-slate-900 uppercase mt-1">
+          Nuestra Recomendación
+        </h3>
+        <p class="text-slate-700 text-sm sm:text-base font-medium mt-3 leading-relaxed">
+          {comp.verdictDescription}
+        </p>
+        <div class="mt-6 flex flex-wrap gap-4">
+          <a
+            href="/comparativas"
+            class="px-5 py-2.5 rounded-full text-xs font-black uppercase bg-black text-white hover:bg-slate-800 transition-all shadow-sm"
+          >
+            Ver más comparativas →
+          </a>
+          <a
+            href="/utilidades/calculadora-tokens-ia"
+            class="px-5 py-2.5 rounded-full text-xs font-black uppercase bg-white border border-slate-300 text-slate-900 hover:bg-slate-100 transition-all"
+          >
+            Calcular costos de API ↗
+          </a>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</Layout>

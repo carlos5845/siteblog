@@ -1,0 +1,11 @@
+# Reglas de indexación para motores de búsqueda (Google, Bing, etc.)
+User-agent: *
+Allow: /
+
+# Rastreador oficial de Google AdSense para contextualización de anuncios
+User-agent: Mediapartners-Google
+Allow: /
+
+# Ubicación de los mapas de sitio XML
+Sitemap: https://digitalstack.dev/sitemap.xml
+Sitemap: https://digitalstack.dev/sitemap-index.xml

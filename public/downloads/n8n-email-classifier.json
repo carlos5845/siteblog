@@ -1,0 +1,46 @@
+{
+  "name": "Clasificador Inteligente de Correos con IA - DigitalStack",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "clasificar-correo",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "id": "webhook-node",
+      "name": "Webhook Entrante"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "prompt": "Clasifica el siguiente correo en una de estas categorías: Soporte, Ventas, Facturación o Spam. Devuelve un resumen en 1 frase.\n\nRemitente: {{$json.body.from}}\nAsunto: {{$json.body.subject}}\nContenido: {{$json.body.content}}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1,
+      "position": [220, 0],
+      "id": "openai-node",
+      "name": "Clasificador OpenAI"
+    }
+  ],
+  "connections": {
+    "Webhook Entrante": {
+      "main": [
+        [
+          {
+            "node": "Clasificador OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

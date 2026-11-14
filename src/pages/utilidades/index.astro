@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdBanner from '../../components/AdBanner.astro';
+
+const utilities = [
+  {
+    title: 'Calculadora de Tokens y Costos de IA',
+    description: 'Estima el consumo en tokens y el costo en USD por petición y mensual para OpenAI (GPT-4o), Anthropic (Claude 3.5), Google (Gemini) y DeepSeek.',
+    href: '/utilidades/calculadora-tokens-ia',
+    status: 'Disponible',
+    badge: 'Popular',
+    icon: '⚡',
+    badgeBg: 'bg-[#dcfce7] text-[#15803d]',
+  },
+  {
+    title: 'Generador y Optimizador de Prompts',
+    description: 'Convierte instrucciones vagas en prompts estructurados bajo marcos como CRISPE, Few-Shot y Chain-of-Thought.',
+    href: '/utilidades/optimizador-prompts-ia',
+    status: 'Disponible',
+    badge: 'Nuevo',
+    icon: '✨',
+    badgeBg: 'bg-[#fef08a] text-[#854d0e]',
+  },
+  {
+    title: 'Comparador de Context Window & Memoria LLM',
+    description: 'Calcula cuántas páginas de PDF, libros o líneas de código caben en la ventana de contexto de cada modelo existente.',
+    href: '/comparativas',
+    status: 'Disponible',
+    badge: 'En Comparativas',
+    icon: '📊',
+    badgeBg: 'bg-[#ede9fe] text-[#6b21a8]',
+  },
+  {
+    title: 'Calculadora de ROI en Automatización',
+    description: 'Calcula las horas ahorradas al mes y el retorno de inversión al migrar procesos repetitivos a flujos de trabajo con n8n.',
+    href: '#',
+    status: 'Próximamente',
+    badge: 'En desarrollo',
+    icon: '⏱️',
+    badgeBg: 'bg-slate-100 text-slate-600',
+  },
+];
+---
+
+<Layout
+  title="Utilidades y Herramientas Gratuitas de IA y Automatización"
+  description="Aplicaciones interactivas gratuitas en navegador: calculadora de tokens de IA, optimizador de prompts, estimadores de costos de APIs y más."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    <div class="max-w-3xl mx-auto text-center mb-10">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-black uppercase tracking-wider mb-3">
+        Micro-Aplicaciones Web
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight uppercase">
+        Utilidades Gratuitas
+      </h1>
+      <p class="text-slate-500 font-medium text-sm sm:text-base mt-3">
+        Aplicaciones interactivas rápidas, ejecutadas en el navegador, sin registros obligatorios y con privacidad asegurada.
+      </p>
+    </div>
+
+    <AdBanner format="leaderboard" slotId="utils-top-banner" />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10 max-w-5xl mx-auto">
+      {utilities.map((item) => (
+        <div class="p-8 rounded-[2rem] border border-slate-200 bg-white hover:border-slate-400 hover:shadow-md transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-3xl icon-bounce">{item.icon}</span>
+              <span class={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full ${item.badgeBg}`}>
+                {item.status}
+              </span>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight group-hover:text-emerald-600 transition-colors">
+              {item.title}
+            </h3>
+
+            <p class="text-xs sm:text-sm text-slate-600 font-medium mt-2.5 leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-400">100% en cliente</span>
+            {item.status === 'Disponible' ? (
+              <a
+                href={item.href}
+                class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wide bg-black text-white hover:bg-slate-800 transition-all shadow-sm"
+              >
+                <span>Abrir Utilidad</span>
+                <span>↗</span>
+              </a>
+            ) : (
+              <span class="text-xs text-slate-400 font-bold uppercase">Próximamente</span>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <AdBanner format="in-feed" slotId="utils-bottom-banner" />
+
+  </div>
+</Layout>

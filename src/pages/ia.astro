@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AdBanner from '../components/AdBanner.astro';
+
+const sections = [
+  {
+    title: 'Modelos de Lenguaje (LLMs)',
+    desc: 'Análisis de GPT-4o, Claude 3.5 Sonnet, DeepSeek, Gemini y modelos open-weights como Llama 3.',
+    link: '/herramientas',
+    tag: 'LLMs',
+    tagBg: 'bg-[#fef08a] text-[#854d0e]',
+  },
+  {
+    title: 'Agentes Autónomos',
+    desc: 'Frameworks, arquitecturas multi-agente, memoria, herramientas y razonamiento autónomo.',
+    link: '/guias',
+    tag: 'Agentes',
+    tagBg: 'bg-[#dcfce7] text-[#15803d]',
+  },
+  {
+    title: 'Herramientas de IA para Productividad',
+    desc: 'Buscadores conversacionales, editores de código con IA y asistentes de investigación.',
+    link: '/herramientas',
+    tag: 'Productividad',
+    tagBg: 'bg-[#ede9fe] text-[#6b21a8]',
+  },
+  {
+    title: 'Calculadora de Costos & Tokens',
+    desc: 'Calcula cuánto cuesta utilizar los modelos de IA líderes para tus aplicaciones.',
+    link: '/utilidades/calculadora-tokens-ia',
+    tag: 'Utilidad',
+    tagBg: 'bg-[#bae6fd] text-[#075985]',
+  },
+];
+---
+
+<Layout
+  title="Inteligencia Artificial: Modelos, Agentes y Herramientas"
+  description="Aprende y domina la Inteligencia Artificial: tutoriales de modelos LLM, comparativas de rendimiento, costos de APIs y directorio de software de IA."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    <div class="max-w-3xl mb-10">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-black uppercase tracking-wider mb-3">
+        Especialización
+      </span>
+      <h1 class="text-3xl sm:text-6xl font-black text-slate-900 tracking-tight uppercase">
+        Inteligencia Artificial
+      </h1>
+      <p class="text-slate-500 font-medium text-sm sm:text-base mt-3 leading-relaxed">
+        Explora las últimas innovaciones en modelos de lenguaje, arquitecturas de agentes autónomos, prompts profesionales y herramientas prácticas para el día a día.
+      </p>
+    </div>
+
+    <AdBanner format="leaderboard" slotId="ia-top-banner" />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+      {sections.map((sec) => (
+        <a
+          href={sec.link}
+          class="p-8 rounded-[2rem] border border-slate-200 bg-white hover:border-slate-400 hover:shadow-md transition-all group flex flex-col justify-between"
+        >
+          <div>
+            <span class={`inline-block text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full mb-4 ${sec.tagBg}`}>
+              {sec.tag}
+            </span>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight group-hover:text-emerald-600 transition-colors">
+              {sec.title}
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 font-medium mt-2 leading-relaxed">
+              {sec.desc}
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-black uppercase text-slate-900">
+            <span>Explorar tema</span>
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {/* CTA Sólido Verde Pastel a la Calculadora */}
+    <div class="p-8 sm:p-10 rounded-[2.5rem] bg-[#dcfce7] border border-[#bbf7d0] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+      <div>
+        <span class="text-xs font-black text-[#15803d] uppercase tracking-wider">Herramienta Interactiva</span>
+        <h3 class="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight mt-1">
+          ¿Desarrollas con APIs de IA?
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-700 font-medium mt-1 max-w-xl">
+          Utiliza nuestra calculadora en tiempo real para proyectar tu gasto de tokens mensual antes de lanzar tu aplicación a producción.
+        </p>
+      </div>
+      <a
+        href="/utilidades/calculadora-tokens-ia"
+        class="shrink-0 px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-wide bg-black text-white hover:bg-slate-800 transition-all shadow-md"
+      >
+        Abrir Calculadora ↗
+      </a>
+    </div>
+
+    <AdBanner format="in-feed" slotId="ia-bottom-banner" />
+  </div>
+</Layout>

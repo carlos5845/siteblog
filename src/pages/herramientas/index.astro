@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdBanner from '../../components/AdBanner.astro';
+import ToolsDirectory from '../../components/tools/ToolsDirectory';
+import { TOOLS_DATA } from '../../data/tools';
+
+const categories = ['Todos', 'IA', 'Automatización', 'Productividad', 'Desarrollo'];
+---
+
+<Layout
+  title="Directorio de Software & Herramientas Tecnológicas"
+  description="Catálogo de las mejores herramientas de Inteligencia Artificial, automatización y productividad. Análisis, precios, casos de uso y comparativas."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-black uppercase tracking-wider mb-3">
+        Directorio Tecnológico
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight uppercase">
+        Herramientas Digitales & IA
+      </h1>
+      <p class="text-slate-500 font-medium text-sm sm:text-base mt-3">
+        Catálogo verificado por desarrolladores. Filtra por categoría y encuentra el software perfecto para tus flujos de trabajo.
+      </p>
+    </div>
+
+    <AdBanner format="leaderboard" slotId="tools-top-banner" />
+
+    {/* Componente Reactivo de Directorio con Filtros en Tiempo Real */}
+    <div class="my-8">
+      <ToolsDirectory
+        client:load
+        initialTools={TOOLS_DATA}
+        categories={categories}
+      />
+    </div>
+
+    <AdBanner format="in-feed" slotId="tools-bottom-banner" />
+
+  </div>
+</Layout>

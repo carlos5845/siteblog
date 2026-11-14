@@ -1,0 +1,74 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdBanner from '../../components/AdBanner.astro';
+import { GUIDES_DATA } from '../../data/guides';
+---
+
+<Layout
+  title="Guías y Tutoriales Paso a Paso sobre IA y Automatización"
+  description="Tutoriales técnicos prácticos sobre inteligencia artificial, automatización con n8n, modelos locales, APIs y optimización de flujos de trabajo."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    
+    <div class="max-w-3xl mx-auto text-center mb-10">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-black uppercase tracking-wider mb-3">
+        Aprendizaje Práctico
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight uppercase">
+        Guías y Tutoriales
+      </h1>
+      <p class="text-slate-500 font-medium text-sm sm:text-base mt-3">
+        Artículos educativos con explicaciones directas, código probado y soluciones a problemas reales de implementación técnica.
+      </p>
+    </div>
+
+    <AdBanner format="leaderboard" slotId="guides-top-banner" />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
+      {GUIDES_DATA.map((guide) => (
+        <article class="p-7 sm:p-8 rounded-[2rem] border border-slate-200 bg-white hover:border-slate-400 hover:shadow-md transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 text-xs font-bold text-slate-500 mb-4">
+              <span class={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${guide.pillBg}`}>
+                {guide.category}
+              </span>
+              <span>{guide.readTime}</span>
+            </div>
+
+            <a href={`/guias/${guide.slug}`} class="block">
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 uppercase leading-snug tracking-tight group-hover:text-emerald-600 transition-colors">
+                {guide.title}
+              </h2>
+            </a>
+
+            <p class="text-xs sm:text-sm text-slate-600 mt-3 font-medium leading-relaxed">
+              {guide.description}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mt-5">
+              {guide.tags.map((tag) => (
+                <span class="text-[10px] font-semibold px-2.5 py-1 rounded-md bg-slate-50 text-slate-600 border border-slate-100">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-400">
+            <span>{guide.date}</span>
+            <a
+              href={`/guias/${guide.slug}`}
+              class="inline-flex items-center gap-1.5 text-slate-900 font-black uppercase group-hover:translate-x-1 transition-transform"
+            >
+              <span>Leer guía</span>
+              <span>→</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <AdBanner format="in-feed" slotId="guides-bottom-banner" />
+
+  </div>
+</Layout>
