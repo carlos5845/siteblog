@@ -1,3 +1,1 @@
-# Archivo ads.txt obligatorio para monetización con Google AdSense
-# Reemplaza pub-0000000000000000 con tu ID de editor de AdSense (16 dígitos)
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+google.com, pub-4634198418657669, DIRECT, f08c47fec0942fa0

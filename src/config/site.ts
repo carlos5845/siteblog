@@ -21,9 +21,9 @@ export const siteConfig: SiteConfig = {
   name: "DigitalStack",
   title: "DigitalStack — Portal de IA, Automatización y Herramientas Digitales",
   description: "Aprende a usar Inteligencia Artificial, automatizar tareas, descubrir software y utilizar herramientas interactivas gratuitas para potenciar tu productividad.",
-  url: "https://digitalstack.dev",
+  url: "https://zonarespawn.lat",
   author: "DigitalStack Team",
-  adSenseClientId: import.meta.env.PUBLIC_ADSENSE_CLIENT_ID || "", // e.g. ca-pub-XXXXXXXXXXXXXXXX
+  adSenseClientId: import.meta.env.PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-4634198418657669",
   googleAdsId: import.meta.env.PUBLIC_GOOGLE_ADS_ID || "", // e.g. AW-XXXXXXXXX
   googleAnalyticsId: import.meta.env.PUBLIC_GA_ID || "", // e.g. G-XXXXXXXXX
   navLinks: [

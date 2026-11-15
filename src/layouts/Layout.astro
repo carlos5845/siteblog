@@ -89,16 +89,12 @@ const jsonLd = schema || defaultSchema;
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     {/* Google AdSense - Meta de Verificación de Cuenta y Script Oficial */}
-    {siteConfig.adSenseClientId && (
-      <>
-        <meta name="google-adsense-account" content={siteConfig.adSenseClientId} />
-        <script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adSenseClientId}`}
-          crossorigin="anonymous"
-        />
-      </>
-    )}
+    <meta name="google-adsense-account" content={siteConfig.adSenseClientId || "ca-pub-4634198418657669"} />
+    <script
+      async
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adSenseClientId || "ca-pub-4634198418657669"}`}
+      crossorigin="anonymous"
+    />
 
     {/* Google Ads / Google Analytics (gtag.js) */}
     {(siteConfig.googleAdsId || siteConfig.googleAnalyticsId) && (

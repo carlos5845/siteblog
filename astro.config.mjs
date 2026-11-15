@@ -7,7 +7,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://digitalstack.dev',
+  site: 'https://zonarespawn.lat',
   integrations: [
     react(),
     mdx(),
